@@ -1,0 +1,11 @@
+/*
+**  Main CSS classes
+*/
+
+*,
+*:before,
+*:after { box-sizing: border-box; }
+
+body {
+  font-family: 'Trebuchet MS';
+}
