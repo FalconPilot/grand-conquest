@@ -8,7 +8,25 @@
   </head>
 
   <!-- BODY -->
-  <body>
-    <?php include(PAGEVIEW); ?>
+  <body class="flex-col">
+
+    <header class="flex-col flex-middle">
+      <h1><a href="/">Grand Conquest</a></h1>
+      <div class="flex-row flex-middle">
+        <?php if (session_status() == PHP_SESSION_NONE) {
+          include(dirname(__FILE__).'/header/logged_out.phtml');
+        } else {
+          include(dirname(__FILE__).'/header/logged_in.phtml');
+        } ?>
+      </div>
+    </header>
+
+    <main>
+      <?php include(PAGEVIEW); ?>
+    </main>
+
+    <footer>
+      <p>Backend V-<?php echo(GC_VERSION); ?></p>
+    </footer>
   </body>
 </html>
