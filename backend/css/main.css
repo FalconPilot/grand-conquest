@@ -59,6 +59,21 @@ body > main { flex: 1; }
 .flex-wrap { flex-wrap: wrap; }
 
 /*
+**  Flash classes
+*/
+
+#flash-wrapper {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  padding: 10px;
+  z-index: 999;
+}
+
+/*
 **  Login form classes
 */
 
