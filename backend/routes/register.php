@@ -5,7 +5,7 @@ if($_SERVER['REQUEST_METHOD'] != "POST") {
   exit("[405] - Method not allowed");
 }
 
-include('./lib/session.php');
+include('./lib/FpSession.php');
 
 $sess = new FpSession();
 $sess->register();

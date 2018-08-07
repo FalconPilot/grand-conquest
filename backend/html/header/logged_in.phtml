@@ -1,1 +1,4 @@
-<div>Logged in</div>
+<div class="flex-row flex-middle">
+  <p class="welcome-msg">Welcome, <?php echo($_SESSION['username']); ?></p>
+  <a href="/router.php?path=logout">Logout</a>
+</div>

@@ -16,10 +16,10 @@
     <header class="flex-col flex-middle">
       <h1><a href="/">Grand Conquest</a></h1>
       <div class="flex-row flex-middle">
-        <?php if (session_status() == PHP_SESSION_NONE) {
-          include(dirname(__FILE__).'/header/logged_out.phtml');
-        } else {
+        <?php if (isset($_SESSION) && count($_SESSION) > 0) {
           include(dirname(__FILE__).'/header/logged_in.phtml');
+        } else {
+          include(dirname(__FILE__).'/header/logged_out.phtml');
         } ?>
       </div>
     </header>

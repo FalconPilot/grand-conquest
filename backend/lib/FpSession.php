@@ -1,13 +1,10 @@
 <?php
 
-include(dirname(__FILE__).'/tools.php');
+include(dirname(__FILE__).'/FpTools.php');
 
 /*
 **  Session handlers
 */
-
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
 
 class FpSession extends FpTools {
 
@@ -25,6 +22,8 @@ class FpSession extends FpTools {
           "cookie_lifetime" => 86400
         ]);
 
+        $this->initUserData($_POST['email']);
+
       // Password/Email is incorrect
       } else {
         $msg = "ep_incorrect";
@@ -33,8 +32,16 @@ class FpSession extends FpTools {
       $msg = "logged";
     }
 
-    $this->redirect($url, $msg);
+    $this->redirect($url, $msg, "error");
 
+  }
+
+  // Set initial data
+  private function initUserData($email) {
+    $row = $this->queryRow("users", "email = '{$email}'");
+    foreach (['id', 'username'] as $key) {
+      $_SESSION[$key] = $row[$key];
+    }
   }
 
   // Check password
@@ -46,7 +53,14 @@ class FpSession extends FpTools {
   // Logout user
   public function logout() {
     session_unset();
+    setcookie(session_name(), "", time()-3600, "/");
     session_destroy();
+    $this->redirect("/");
+  }
+
+  // Register user
+  public function register() {
+    $this->redirect("/");
   }
 
 }
