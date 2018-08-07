@@ -12,7 +12,7 @@ define('GC_VERSION', '0.1.1');
 // Current Pageview
 $pagename = explode('/', $_SERVER['REQUEST_URI'])[0];
 if (!$pagename || $pagename === "") { $pagename = "index"; }
-define('PAGEVIEW', './html/routes/'.$pagename.'.phtml');
+define('PAGEVIEW', './html/pages/'.$pagename.'.phtml');
 
 // Include Core HTML
 include('./html/core.phtml');

@@ -1,5 +1,30 @@
-<form class="flex-row flex-middle login-form" action="/login.php" method="POST">
-  <input type="text" name="email" placeholder="email"/>
-  <input type="password" name="pwd" placeholder="password"/>
-  <input type="submit" value="Login"/>
-</form>
+<div id="register-viewport" class="flex-row flex-middle">
+  <form class="flex-row flex-middle login-form" action="/router.php?path=login" method="POST">
+    <input type="text" name="email" placeholder="email"/>
+    <input type="password" name="pwd" placeholder="password"/>
+    <input type="submit" value="Login"/>
+  </form>
+
+  <button type="button" id="register-drop-btn">Register</button>
+
+  <div id="register-window">
+    <?php include(dirname(__FILE__).'/register.phtml'); ?>
+  </div>
+</div>
+
+<script>
+  document.getElementById('register-drop-btn').addEventListener('click', function() {
+    var viewport = document.getElementById('register-window');
+    if (viewport.style.display) {
+      viewport.style.opacity = null;
+      window.setTimeout(function() {
+        viewport.style.display = null;
+      }, 220);
+    } else {
+      viewport.style.display = 'block';
+      window.setTimeout(function() {
+        viewport.style.opacity = '1.0';
+      }, 20);
+    }
+  });
+</script>
