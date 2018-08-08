@@ -36,7 +36,7 @@ class FpSession {
 
   // Set initial data
   static private function initUserData($email) {
-    $row = FpTools::queryRow("users", "email = '{$email}'");
+    $row = FpTools::queryRow("users", "email = '{$email}'", ["password"]);
     foreach (array_keys($row) as $key) {
       $_SESSION[$key] = $row[$key];
     }

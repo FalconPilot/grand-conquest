@@ -1,0 +1,28 @@
+/*
+**  Loading spinner classes
+*/
+
+div.spinner-wrapper {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.spinner-wrapper > div {
+  width: 80px;
+  height: 80px;
+  border-top: 3px solid #333;
+  border-radius: 40px;
+  animation: spin infinite 1s linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  } to {
+    transform: rotate(360deg);
+  }
+}

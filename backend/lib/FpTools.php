@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 /*
 **  Custom useful functions for convenience
 */
@@ -28,9 +31,17 @@ class FpTools {
   }
 
   // Query entire row
-  static public function queryRow($table, $cond = "true") {
+  static public function queryRow($table, $cond = "true", $exclude = []) {
     $result = FpTools::connect()->query("SELECT * FROM {$table} WHERE {$cond} LIMIT 1");
-    return $result ? $result->fetch_array() : null;
+    return $result ? FpTools::removeSingleExcluded($result->fetch_array(MYSQLI_ASSOC), $exclude) : null;
+  }
+
+  // Query all rows
+  static public function queryAll($table, $cond = "true", $exclude = []) {
+    $result = FpTools::connect()->query("SELECT * FROM {$table} WHERE {$cond}");
+    $data = $result ? $result->fetch_array(MYSQLI_ASSOC) : null;
+    $wrap = $data && $result->num_rows === 1 ? [$data] : $data;
+    return FpTools::removeExcluded($wrap, $exclude);
   }
 
   // Roll dice
@@ -46,6 +57,22 @@ class FpTools {
     return $arr->map($mapper)->get();
   }
 
+  static private function removeSingleExcluded($result, $excludeList) {
+    return FpTools::removeExcluded([$result], $excludeList)[0];
+  }
+
+  // Filter rows based on array of excluded keys
+  static private function removeExcluded($result, $excludeList) {
+    $arr = new FpArray($result);
+
+    // Return mapped values
+    return $arr->map(function($row) use ($excludeList) {
+      foreach($excludeList as $key) {
+        unset($row[$key]);
+      }
+      return $row;
+    })->get();
+  }
 }
 
 ?>

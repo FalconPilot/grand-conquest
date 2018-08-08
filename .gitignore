@@ -2,8 +2,14 @@
 /build
 /backend/priv
 
-# Front-end app build
+# User app build
 /backend/app/static
 /backend/app/app.html
 /backend/app/asset-manifest.json
 /backend/app/manifest.json
+
+# Mod app build
+/backend/mod/static
+/backend/mod/app.html
+/backend/mod/asset-manifest.json
+/backend/mod/manifest.json

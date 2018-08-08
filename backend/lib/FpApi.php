@@ -6,22 +6,65 @@ include_once(dirname(__FILE__).'/FpTools.php');
 class FpApi {
 
   // Authorization constants
-  const $auth_public      = 1;
-  const $auth_restricted  = 2;
-  const $auth_forbidden   = 3;
+  const AUTH_USR = 1;
+  const AUTH_MOD = 2;
+  const AUTH_ADM = 3;
 
-  // Check authorization
-  static private function isAllowed($required_level) {
+  const AUTHORIZATIONS = [
+    "user"      => FpApi::AUTH_USR,
+    "moderator" => FpApi::AUTH_MOD,
+    "admin"     => FpApi::AUTH_ADM
+  ];
 
+  // Other constants
+  const PRIVATE_KEYS = ["password", "personal_api_key", "email"];
+
+  /*
+  **  Check general authorization
+  */
+
+  static private function isAllowed($required) {
+    $status = FpTools::queryValue("users", "status", "personal_api_key = '{$_GET['ak']}'");
+    if ($status && FpApi::AUTHORIZATIONS[$status] >= $required) {
+      return;
+    } else {
+      FpApi::returnError(401, "Forbidden access");
+    }
+  }
+
+  /*
+  **  Check individual users authorizations
+  */
+
+  static private function forUser($table, $id_data) {
+    $user = FpTools::queryRow("users", "personal_api_key = '{$_GET['ak']}'");
+
+    // If user is found, process
+    if ($user && $user["id"] && $user["status"] < FpApi::AUTH_MOD) {
+      $row = FpTools::queryRow($table, "id_user", "id_user = {$user['id']}");
+
+      // Check ID correspondance
+      if ($iu !== $user["id"]) {
+        FpApi::returnError(401, "Forbidden access");
+      }
+
+    // Return forbidden error
+    } else {
+      FpApi::returnError(401, "Forbidden access");
+    }
   }
 
   // Check required params
   static private function checkParams($source, $query) {
     $arr = new FpArray($query);
     $filter = function($key) use ($source) {
-      return array_key_exists($key, $source);
+      return !array_key_exists($key, $source);
     };
-    $arr->filter($filter)->get();
+
+    // Return error if parameters are missing
+    if ($arr->filter($filter)->count() > 0) {
+      FpApi::returnError(400, "Parameters are missing");
+    }
   }
 
   static private function returnError($code = 500, $message = "Internal server error") {
@@ -30,8 +73,16 @@ class FpApi {
   }
 
   // Fetch all data from category
-  static public function fetchAll($table) {
+  static public function fetchAll($table, $auth_required) {
+    FpApi::isAllowed($auth_required);
 
+    return FpTools::queryAll($table, "true", FpApi::PRIVATE_KEYS);
+  }
+
+  // Fetch all data from multiple categories
+  static public function fetchMultiple($tables) {
+    $arr = new FpArray($tables);
+    return $arr->map(FpApi::fetchAll)->get();
   }
 }
 
