@@ -127,7 +127,7 @@ body > main {
 .button-white:active,
 .button-white:visited {
   height: 25px;
-  line-height: 25px;
+  line-height: 20px;
   margin: 2px 5px;
   padding: 2px 5px;
 
