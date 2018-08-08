@@ -1,4 +1,9 @@
 *.DS_Store
 /build
 /backend/priv
-/backend/app
+
+# Front-end app build
+/backend/app/static
+/backend/app/app.html
+/backend/app/asset-manifest.json
+/backend/app/manifest.json

@@ -1,15 +1,9 @@
 <?php
 
 // Common includes
-include('./includes.php');
+include('./init.php');
 
-// Check session
-session_start();
-if (!isset($_SESSION['id'])) {
-  session_unset();
-  setcookie(session_name(), "", time()-3600, "/");
-  session_destroy();
-}
+FpSession::initSession();
 
 // Current Pageview
 $pagename = explode('/', $_SERVER['REQUEST_URI'])[0];

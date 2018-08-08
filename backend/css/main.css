@@ -46,7 +46,10 @@ body > footer > p {
   font-size: 8px;
 }
 
-body > main { flex: 1; }
+body > main {
+  color: #333345;
+  flex: 1;
+}
 
 /*
 **  Flex classes
@@ -124,6 +127,7 @@ body > main { flex: 1; }
 .button-white:active,
 .button-white:visited {
   height: 25px;
+  line-height: 25px;
   margin: 2px 5px;
   padding: 2px 5px;
 

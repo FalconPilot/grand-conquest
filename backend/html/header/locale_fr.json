@@ -1,0 +1,271 @@
+{
+  "id": "fr",
+  "description": "Equisense, les objets connectés dans le monde de l'équitation",
+  "checkout": "commande",
+  "opengraph": {
+    "title": "Equisense - Capteur connecté",
+    "description": "Progressez et veillez sur votre cheval grâce à Equisense Motion."
+  },
+  "appLink": {
+    "title": "Téléchargez l'application Equisense gratuitement dès maintenant",
+    "description": "Des dizaines d'idées d'exercices pour progresser à cheval."
+  },
+  "help": {
+    "lookup": "Si vous avez une question, votre réponse se trouve peut-être sur notre FAQ",
+    "search": "Rechercher",
+    "chat": "Je n'ai pas ma réponse, je veux discuter avec Equisense"
+  },
+  "newsbar": {
+    "offers": [
+      {
+        "title": "Quel type de cavalier êtes-vous ?",
+        "abriged": "Quel type de cavalier êtes-vous ?",
+        "savoirplus": "FAITES LE TEST",
+        "link": "/fr/rider-tips",
+        "external": false,
+        "toggleCookie": "quizz-taken"
+      },
+      {
+        "title": "<strong>Breaking news :</strong>&nbsp;il y a du nouveau chez Equisense !",
+        "abriged": "Du nouveau chez Equisense",
+        "savoirplus": "Voir la vidéo",
+        "button": "video-button",
+        "toggleCookie": "video-seen"
+      },
+      {
+        "title": "🚚 Frais de port gratuits dès 50€ d'achat !",
+        "abriged": "🚚 Frais de port gratuits dès 50€ d'achat !"
+      },
+      {
+        "rand": [
+          {
+            "title": "A quoi ressembleraient vos séances avec Equisense Motion ?",
+            "abriged": "A quoi ressembleraient vos séances avec Equisense Motion ?",
+            "savoirplus": "Essayez-le gratuitement",
+            "link": "https://essai.equisense.com?button=banner1",
+            "external": true
+          },
+          {
+            "title": "Avant de l’acheter, essayez Equisense Motion",
+            "abriged": "Avant de l’acheter, essayez Equisense Motion",
+            "savoirplus": "Essayez-le gratuitement",
+            "link": "https://essai.equisense.com?button=banner2",
+            "external": true
+          },
+          {
+            "title": "Equisense Motion disponible à l’essai 100% gratuitement",
+            "abriged": "Equisense Motion disponible à l’essai 100% gratuitement",
+            "savoirplus": "Essayez-le gratuitement",
+            "link": "https://essai.equisense.com?button=banner3",
+            "external": true
+          }
+        ]
+      }
+    ],
+    "fallback": {
+      "title":  "Retrouvez les dernières news sur Facebook",
+      "abriged":  "Retrouvez les dernières news sur Facebook",
+      "savoirplus": "EN SAVOIR +",
+      "link": "https://www.facebook.com/equisenseappFR",
+      "external": true
+    }
+  },
+  "download": {
+    "android": "Téléchargez gratuitement l'application sur Android",
+    "ios": "Téléchargez gratuitement l'application sur iOS",
+    "and-link": "https://play.google.com/store/apps/details?id=com.equisense.motions",
+    "ios-link": "https://itunes.apple.com/ch/app/equisense-horse-progress/id1140050104?l=fr&mt=8"
+  },
+  "quizz": {
+    "title": "Quel cavalier êtes-vous&nbsp;?",
+    "text": "Recevez des <span>conseils personnalisés</span> et des <span>idées d'exercices</span> en fonction de votre profil.",
+    "button": "Faites le test"
+  },
+  "cart": {
+    "purchased": "Votre pack motion a bien été ajouté<br/>dans votre panier",
+    "product": "Produit",
+    "quantity": "Quantité",
+    "color": "Couleur",
+    "continue": "Continuer les achats",
+    "pay": "Passer commande"
+  },
+  "header": {
+    "products": {
+      "title": "Notre produit",
+      "link": "/fr/motion",
+      "list": [
+        {
+          "name": "Equisense Motion",
+          "link": "/fr/motion",
+          "external": false
+        },
+        {
+          "name": "Accessoires",
+          "link": "https://shop.equisense.com/fr/3-accessoires",
+          "external": false
+        }
+      ]
+    },
+    "options": [
+      {
+        "name": "Accueil",
+        "link": "/fr",
+        "external": false
+      },
+      {
+        "name": "Equisense Motion",
+        "link": "/fr/motion",
+        "external": false
+      },
+      {
+        "name": "Accessoires",
+        "link": "https://shop.equisense.com/fr/3-accessoires",
+        "external": false
+      },
+      {
+        "name": "Notre histoire",
+        "link": "/fr/about",
+        "external": false
+      },
+      {
+        "name":"Le blog",
+        "link": "http://blog.equisense.com",
+        "external": false
+      }
+    ],
+    "home": "Accueil",
+    "journey": "Notre histoire",
+    "blog": "Le blog",
+    "shop": "BOUTIQUE",
+    "navigate": "Naviguer"
+  },
+  "newsletter": {
+    "title": "Recevez des idées d'exercices et des conseils pour progresser et prendre soin de votre cheval",
+    "submit": "S'inscrire",
+    "email": "adresse mail"
+  },
+  "footer": {
+    "mentions": "Mentions légales",
+    "copyright": "© Copyright 2018 Equisense. Tous droits réservés",
+    "social": {
+      "facebook": "https://www.facebook.com/equisenseappFR"
+    },
+    "blocks": [
+      {
+        "title": "Utiliser Equisense",
+        "fav": false,
+        "contents": [
+          {
+            "text": "Téléchargement iOS",
+            "link": "https://itunes.apple.com/fr/app/equisense-horse-riding-improvement/id1140050104?mt=8",
+            "highlight": false,
+            "external": true
+          },
+          {
+            "text": "Téléchargement Android",
+            "link": "https://play.google.com/store/apps/details?id=com.equisense.motions&hl=fr",
+            "highlight": false,
+            "external": true
+          },
+          {
+            "text": "Centre d'aide",
+            "link": "http://help.equisense.com/l/fr",
+            "highlight": true,
+            "external": true
+          },
+          {
+            "text": "Conditions de vente",
+            "link": "/fr/cgv",
+            "highlight": false,
+            "external": false
+          }
+        ]
+      },
+      {
+        "title": "Nos produits",
+        "fav": true,
+        "contents": [
+          {
+            "text": "Equisense Motion",
+            "link": "/fr/motion",
+            "highlight": false,
+            "external": false
+          },
+          {
+            "text": "Accessoires",
+            "link": "https://shop.equisense.com/fr/3-accessoires",
+            "highlight": false,
+            "external": false
+          }
+        ]
+      },
+      {
+        "title": "L'aventure",
+        "fav": false,
+        "contents": [
+          {
+            "text": "Notre histoire",
+            "link": "/fr/about",
+            "highlight": false,
+            "external": false
+          },
+          {
+            "text": "Nous recrutons !",
+            "link": "http://jobs.equisense.com/",
+            "highlight": true,
+            "external": true
+          },
+          {
+            "text": "Contact",
+            "link": "mailto:contact@equisense.fr",
+            "highlight": false,
+            "external": true
+          },
+          {
+            "text": "Revendeurs",
+            "link": "/fr/vendors",
+            "highlight": false,
+            "external": false
+          },
+          {
+            "text": "Ambassadeurs",
+            "link": "/fr/ambassadors",
+            "highlight": false,
+            "external": false
+          },
+          {
+            "text": "Infographie 2017",
+            "link": "http://infographie.equisense.com/",
+            "highlight": true,
+            "external": true
+          }
+        ]
+      },
+      {
+        "title": "Langues",
+        "fav": false,
+        "redirected": true,
+        "contents": [
+          {
+            "text": "Français",
+            "link": "/fr",
+            "highlight": false,
+            "external": false
+          },
+          {
+            "text": "English",
+            "link": "/en",
+            "highlight": false,
+            "external": false
+          },
+          {
+            "text": "Deutsch",
+            "link": "/de",
+            "highlight": false,
+            "external": false
+          }
+        ]
+      }
+    ]
+  }
+}
