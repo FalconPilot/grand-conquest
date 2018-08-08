@@ -3,8 +3,11 @@
 // Common includes
 include('./includes.php');
 
-session_start();
+// GC Backend Version
+define('GC_VERSION', '0.1.3');
 
+// Check session
+session_start();
 if (!isset($_SESSION['id'])) {
   session_unset();
   setcookie(session_name(), "", time()-3600, "/");
