@@ -192,6 +192,9 @@ body > main {
   padding:  5px 10px;
 }
 
-.register-form > input[type=submit] {
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+.register-form > input[type=submit] { box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); }
+
+.logout-button {
+  background-color: #C33;
+  color: #FFF;
 }
