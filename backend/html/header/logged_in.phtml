@@ -1,6 +1,6 @@
 <div class="flex-row flex-middle">
   <p class="welcome-msg">Welcome, <?php echo($_SESSION['username']); ?></p>
-  <?php if ($_SERVER['REQUEST_URI'] !== "/app"): ?>
+  <?php if ($_SERVER['REQUEST_URI'] !== "/app" && $_SERVER['REQUEST_URI'] !== "/app/"): ?>
     <a href="/app" class="button-white">Access app</a>
   <?php endif; ?>
   <a href="/router.php?path=logout" class="button-white logout-button">Logout</a>
