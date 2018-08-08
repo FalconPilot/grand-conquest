@@ -11,9 +11,6 @@ if (!isset($_SESSION['id'])) {
   session_destroy();
 }
 
-// GC Backend Version
-define('GC_VERSION', '0.1.2');
-
 // Current Pageview
 $pagename = explode('/', $_SERVER['REQUEST_URI'])[0];
 if (!$pagename || $pagename === "") { $pagename = "index"; }

@@ -35,6 +35,7 @@ body > header > h1 { text-align: center; }
 body > header > h1 > a,
 body > header > h1 > a:link,
 body > header > h1 > a:visited {
+  font-family: 'Aldrich';
   color: #FFF;
   text-decoration: none;
 }
@@ -91,8 +92,15 @@ body > main { flex: 1; }
   color: #FFF;
 }
 
-#flash-wrapper > p {
-  margin: 0 10px;
+#flash-wrapper > p { margin: 0 10px; }
+
+/*
+**  Header classes
+*/
+
+.welcome-msg {
+  color: #FFF;
+  margin: 0 10px 0 0;
 }
 
 /*
@@ -109,7 +117,12 @@ body > main { flex: 1; }
 */
 
 .login-form > input[type=text],
-.login-form > input[type=password] {
+.login-form > input[type=password],
+#register-viewport button,
+#register-viewport input[type=submit],
+.button-white,
+.button-white:active,
+.button-white:visited {
   height: 25px;
   margin: 2px 5px;
   padding: 2px 5px;
@@ -123,6 +136,21 @@ body > main { flex: 1; }
 /*
 **  Register form classes
 */
+
+#register-viewport button,
+#register-viewport input[type=submit],
+.button-white,
+.button-white:active,
+.button-white:visited {
+  min-width: 70px;
+  border: none;
+
+  background-color: #FFF;
+  color: #333;
+  text-decoration: none;
+  text-align: center;
+  font-size: 11px;
+}
 
 #register-viewport { position: relative; }
 
@@ -143,4 +171,23 @@ body > main { flex: 1; }
 
   transition: 0.2s;
   z-index: 999;
+}
+
+.register-form > h2 {
+  margin:   5px 10px 10px 10px;
+  padding:  5px 0 10px 0;
+  border-bottom: 1px solid #CCC;
+
+  font-family: 'Aldrich';
+}
+
+.register-form > input[type=text],
+.register-form > input[type=password] {
+  min-width: 250px;
+  margin:   5px;
+  padding:  5px 10px;
+}
+
+.register-form > input[type=submit] {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 }
