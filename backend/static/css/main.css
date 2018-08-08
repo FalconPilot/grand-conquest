@@ -26,15 +26,36 @@ body > main,
 body > footer { width: 100%; }
 
 body > header {
+  position: relative;
   padding: 10px;
-  background-color: #54699a;
+  margin-bottom: 30px;
+  background-color: #979996;
+  background-image: url("/static/img/gui/concrete.png");
 }
 
-body > header > h1 { text-align: center; }
+body > header:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -20px;
+  height: 20px;
+  background-image: url("/static/img/gui/hazard_band.png");
+}
 
-body > header > h1 > a,
-body > header > h1 > a:link,
-body > header > h1 > a:visited {
+.header-screen {
+  min-width: 600px;
+  padding: 10px 50px;
+  background-color: #333;
+  border: 3px solid #555;
+  border-radius: 10px;
+}
+
+.header-screen > h1 { text-align: center; }
+
+.header-screen > h1 > a,
+.header-screen > h1 > a:link,
+.header-screen > h1 > a:visited {
   font-family: 'Aldrich';
   color: #FFF;
   text-decoration: none;

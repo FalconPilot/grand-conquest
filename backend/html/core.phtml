@@ -6,8 +6,8 @@
     <title>Grand Conquest</title>
     <link rel="icon" type="image/png" href="/favicon.png"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aldrich"/>
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
-    <script type="application/javascript" src="/js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
+    <script type="application/javascript" src="/static/js/main.js"></script>
   </head>
 
   <!-- BODY -->
@@ -16,13 +16,15 @@
     <div id="flash-wrapper"></div>
 
     <header class="flex-col flex-middle">
-      <h1><a href="/">Grand Conquest</a></h1>
-      <div class="flex-row flex-middle">
-        <?php if (isset($_SESSION) && count($_SESSION) > 0) {
-          include_once(dirname(__FILE__).'/header/logged_in.phtml');
-        } else {
-          include_once(dirname(__FILE__).'/header/logged_out.phtml');
-        } ?>
+      <div class="flex-col flex-middle header-screen">
+        <h1><a href="/">Grand Conquest</a></h1>
+        <div class="flex-row flex-middle">
+          <?php if (isset($_SESSION) && count($_SESSION) > 0) {
+            include_once(dirname(__FILE__).'/header/logged_in.phtml');
+          } else {
+            include_once(dirname(__FILE__).'/header/logged_out.phtml');
+          } ?>
+        </div>
       </div>
     </header>
 
