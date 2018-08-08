@@ -19,15 +19,15 @@
       <h1><a href="/">Grand Conquest</a></h1>
       <div class="flex-row flex-middle">
         <?php if (isset($_SESSION) && count($_SESSION) > 0) {
-          include(dirname(__FILE__).'/header/logged_in.phtml');
+          include_once(dirname(__FILE__).'/header/logged_in.phtml');
         } else {
-          include(dirname(__FILE__).'/header/logged_out.phtml');
+          include_once(dirname(__FILE__).'/header/logged_out.phtml');
         } ?>
       </div>
     </header>
 
     <main>
-      <?php include(PAGEVIEW); ?>
+      <?php include_once(PAGEVIEW); ?>
     </main>
 
     <footer>

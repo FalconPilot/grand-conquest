@@ -1,6 +1,6 @@
 <?php
 
-include('./lib/FpSession.php');
+include_once('./lib/FpSession.php');
 
 FpSession::logout();
 

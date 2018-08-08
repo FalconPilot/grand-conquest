@@ -1,6 +1,6 @@
 <?php
 
-include(dirname(__FILE__).'/FpTools.php');
+include_once(dirname(__FILE__).'/FpTools.php');
 
 /*
 **  Session handlers

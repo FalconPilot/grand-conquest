@@ -26,6 +26,12 @@ class FpArray {
     return $this;
   }
 
+  // Filter array
+  public function filter($func) {
+    $this->value = array_filter($this->value, $func);
+    return $this;
+  }
+
   /*
   **  Data-returning functions
   */

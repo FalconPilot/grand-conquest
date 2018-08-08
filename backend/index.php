@@ -1,7 +1,7 @@
 <?php
 
 // Common includes
-include('./init.php');
+include_once('./init.php');
 
 FpSession::initSession();
 
@@ -11,6 +11,6 @@ if (!$pagename || $pagename === "") { $pagename = "index"; }
 define('PAGEVIEW', './html/pages/'.$pagename.'.phtml');
 
 // Include Core HTML
-include('./html/core.phtml');
+include_once('./html/core.phtml');
 
 ?>

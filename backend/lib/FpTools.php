@@ -1,10 +1,11 @@
 <?php
 
 /*
-**  Custom MySQL functions for convenience
+**  Custom useful functions for convenience
 */
 
-include(dirname(__FILE__).'/../priv/constants.php');
+include_once(dirname(__FILE__).'/../priv/constants.php');
+include_once(dirname(__FILE__).'/FpArray.php');
 
 class FpTools {
 
@@ -30,6 +31,19 @@ class FpTools {
   static public function queryRow($table, $cond = "true") {
     $result = FpTools::connect()->query("SELECT * FROM {$table} WHERE {$cond} LIMIT 1");
     return $result ? $result->fetch_array() : null;
+  }
+
+  // Roll dice
+  static public function dice($amt = 1, $faces = 6) {
+    $arr = new FpArray(array_pad([], $amt, $faces));
+
+    // Mapping function
+    $mapper = function($n) {
+      return rand(1, $n);
+    };
+
+    // Return mapped array
+    return $arr->map($mapper)->get();
   }
 
 }
