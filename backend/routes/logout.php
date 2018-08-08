@@ -2,7 +2,6 @@
 
 include('./lib/FpSession.php');
 
-$sess = new FpSession();
-$sess->logout();
+FpSession::logout();
 
 ?>

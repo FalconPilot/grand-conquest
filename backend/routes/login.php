@@ -7,7 +7,6 @@ if($_SERVER['REQUEST_METHOD'] != "POST") {
 
 include('./lib/FpSession.php');
 
-$sess = new FpSession();
-$sess->login();
+FpSession::login();
 
 ?>

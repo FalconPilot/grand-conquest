@@ -1,8 +1,7 @@
 {
-  "name": "grand-conquest-frontend",
+  "name": "mods_app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/app",
   "dependencies": {
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

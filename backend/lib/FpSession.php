@@ -9,7 +9,7 @@ include(dirname(__FILE__).'/FpTools.php');
 class FpSession {
 
   // Login user
-  public function login() {
+  static public function login() {
     $url = isset($_POST['redirect']) ? $_POST['redirect'] : "/";
     $msg;
 
@@ -17,12 +17,12 @@ class FpSession {
     if (isset($_POST['email']) && isset($_POST['pwd'])) {
 
       // Password/Email is correct
-      if ($this->checkPassword($_POST['pwd'], $_POST['email']) === true) {
+      if (FpSession::checkPassword($_POST['pwd'], $_POST['email']) === true) {
         session_start([
           "cookie_lifetime" => 86400
         ]);
 
-        $this->initUserData($_POST['email']);
+        FpSession::initUserData($_POST['email']);
 
       // Password/Email is incorrect
       } else {
@@ -35,21 +35,21 @@ class FpSession {
   }
 
   // Set initial data
-  private function initUserData($email) {
+  static private function initUserData($email) {
     $row = FpTools::queryRow("users", "email = '{$email}'");
-    foreach (['id', 'username'] as $key) {
+    foreach (array_keys($row) as $key) {
       $_SESSION[$key] = $row[$key];
     }
   }
 
   // Check password
-  private function checkPassword($pwd, $email) {
+  static private function checkPassword($pwd, $email) {
     $hash = FpTools::queryValue("users", "password", "email = '{$email}'");
     return password_verify($pwd, $hash);
   }
 
   // Logout user
-  public function logout($redirect = true) {
+  static public function logout($redirect = true) {
     session_unset();
     setcookie(session_name(), "", time() - 3600, "/");
     session_destroy();
@@ -61,7 +61,7 @@ class FpSession {
   }
 
   // Register user
-  public function register() {
+  static public function register() {
     $url = isset($_POST['redirect']) ? $_POST['redirect'] : "/";
     $msg;
 
