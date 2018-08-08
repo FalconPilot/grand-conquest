@@ -16,12 +16,9 @@ class App extends Component {
 
   // Main render
   render() {
-    return <div>
-      {this.state.loading === true
-        ? <LoadingSpinner/>
-        : null
-      }
-    </div>
+    return this.state.loading === true
+      ? <LoadingSpinner/>
+      : <div/>
   }
 }
 
