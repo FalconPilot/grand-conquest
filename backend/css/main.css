@@ -194,7 +194,7 @@ body > main {
 
 .register-form > input[type=submit] { box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); }
 
-.white-button.logout-button {
+.button-white.logout-button {
   background-color: #C33;
   color: #FFF;
 }
