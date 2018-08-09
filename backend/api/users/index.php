@@ -8,7 +8,10 @@
 
 include_once(dirname(__FILE__).'/../../lib/FpApi.php');
 
-$users = FpApi::fetchAll("users", FpApi::AUTH_USR);
+$users = isset($_GET['id'])
+  ? FpApi::fetchSingle("users", $_GET['id'], FpApi::AUTH_USR)
+  : FpApi::fetchAll("users", FpApi::AUTH_USR);
+
 
 // If users were fetched, return JSON output
 header("Content-Type: application/json");

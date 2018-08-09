@@ -38,18 +38,19 @@ class FpApi {
 
   static private function forUser($table, $id_data) {
     $user = FpTools::queryRow("users", "personal_api_key = '{$_GET['ak']}'");
+    $level = $user ? (int)FpApi::AUTHORIZATIONS[$user["status"]] : 0;
 
     // If user is found, process
-    if ($user && $user["id"] && $user["status"] < FpApi::AUTH_MOD) {
+    if ($user && $user["id"] && $level < FpApi::AUTH_MOD) {
       $row = FpTools::queryRow($table, "id_user", "id_user = {$user['id']}");
 
       // Check ID correspondance
-      if ($iu !== $user["id"]) {
+      if ($row["id"] !== $user["id"]) {
         FpApi::returnError(401, "Forbidden access");
       }
 
     // Return forbidden error
-    } else {
+  } else if ($level < FpApi::AUTH_MOD) {
       FpApi::returnError(401, "Forbidden access");
     }
   }
@@ -72,14 +73,30 @@ class FpApi {
     exit("<pre>[{$code}] - {$message}</pre>");
   }
 
-  // Fetch all data from category
+  /*
+  **  Fetch all data from table
+  */
+
   static public function fetchAll($table, $auth_required) {
     FpApi::isAllowed($auth_required);
 
     return FpTools::queryAll($table, "true", FpApi::PRIVATE_KEYS);
   }
 
-  // Fetch all data from multiple categories
+  /*
+  **  Fetch one row from a table
+  */
+
+  static public function fetchSingle($table, $id_data, $auth_required) {
+    FpApi::forUser($table, $id_data);
+
+    return FpTools::queryRow($table, "id = {$id_data}", FpApi::PRIVATE_KEYS);
+  }
+
+  /*
+  **  Fetch all data from multiple tables
+  */
+
   static public function fetchMultiple($tables) {
     $arr = new FpArray($tables);
     return $arr->map(FpApi::fetchAll)->get();

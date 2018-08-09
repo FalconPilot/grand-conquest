@@ -28,7 +28,7 @@ body > footer { width: 100%; }
 body > header {
   position: relative;
   padding: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   background-color: #979996;
   background-image: url("/static/img/gui/concrete.png");
 }

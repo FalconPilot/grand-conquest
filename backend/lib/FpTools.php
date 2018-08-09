@@ -12,31 +12,56 @@ include_once(dirname(__FILE__).'/FpArray.php');
 
 class FpTools {
 
-  // Redirect to other page
+  /*
+  **  Redirect user to other page
+  */
+
   static public function redirect($url, $code = null, $type = "notif") {
     $arg = is_string($code) ? "?flash={$code}&type={$type}" : "";
     header("Location: {$url}{$arg}");
     exit();
   }
 
-  // Connect to database
+  /*
+  **  Connect to database
+  */
+
   static private function connect() {
     return new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
   }
 
-  // Query single value
+  /*
+  **  Query single value
+  */
+
   static public function queryValue($table, $key, $cond = "true") {
     $result = FpTools::connect()->query("SELECT {$key} FROM {$table} WHERE {$cond} LIMIT 1");
     return $result ? $result->fetch_array()[$key] : null;
   }
 
-  // Query entire row
+  /*
+  **  Query entire row
+  */
+
   static public function queryRow($table, $cond = "true", $exclude = []) {
     $result = FpTools::connect()->query("SELECT * FROM {$table} WHERE {$cond} LIMIT 1");
     return $result ? FpTools::removeSingleExcluded($result->fetch_array(MYSQLI_ASSOC), $exclude) : null;
   }
 
-  // Query all rows
+  /*
+  **  Query row, only selecting some keys
+  */
+
+  static public function queryRowSelect($table, $cond = "true", $keys) {
+    $q = implode(", ", $keys);
+    $result = FpTools::connect()->query("SELECT {$q} FROM {$table} WHERE {$cond} LIMIT 1");
+    return $result ? $result->fetch_array(MYSQLI_ASSOC) : null;
+  }
+
+  /*
+  **  Query only one row
+  */
+
   static public function queryAll($table, $cond = "true", $exclude = []) {
     $result = FpTools::connect()->query("SELECT * FROM {$table} WHERE {$cond}");
     $data = $result ? $result->fetch_array(MYSQLI_ASSOC) : null;
@@ -44,7 +69,10 @@ class FpTools {
     return FpTools::removeExcluded($wrap, $exclude);
   }
 
-  // Roll dice
+  /*
+  **  Roll a set amount of dices
+  */
+
   static public function dice($amt = 1, $faces = 6) {
     $arr = new FpArray(array_pad([], $amt, $faces));
 
