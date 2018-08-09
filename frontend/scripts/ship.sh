@@ -16,4 +16,4 @@ echo "$ARR Renaming 'index.html' => 'app.html'"
 mv build/index.html build/app.html
 echo "$ARR Shipping built app to '$GC_APP_FOLDER'"
 cp -r build/* ../../backend/$GC_APP_FOLDER/.
-echo "${GRE}--- ALL OK ! ---${GRE}"
+echo "${GRE}--- ALL OK ! ---${NC}"
