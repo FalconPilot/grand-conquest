@@ -1,9 +1,19 @@
 // React core
 import React, { Component } from 'react'
 
+// Local components
+import Armies  from './Armies'
+import Profile from './Profile'
+
 // Common components
-import Army, { armProps } from './common/Army/code'
-import LoadingSpinner     from './common/LoadingSpinner/code'
+import LoadingSpinner from './common/LoadingSpinner/code'
+
+// Common functions
+import { exists } from '../helpers/common/utility'
+
+/*
+**  Main App component
+*/
 
 class App extends Component {
 
@@ -11,12 +21,7 @@ class App extends Component {
   **  Constant card list to render
   */
 
-  cards = {
-    "Army": {
-      component:  Army,
-      properties: armProps
-    }
-  }
+  cards = [ Profile, Armies ]
 
   /*
   **  Class constructor
@@ -26,7 +31,32 @@ class App extends Component {
     super(props)
     this.state = {
       loading:  true,
-      viewport: null
+      error:    null,
+      viewport: null,
+      appData:  null
+    }
+  }
+
+  /*
+  **  Component mounting hook
+  */
+
+  componentWillMount() {
+    document.getElementById('app-ephemeral').outerHTML = ''
+
+    // If data exist, finish loading
+    if (exists(window.appData)) {
+      this.setState({
+        appData: window.appData,
+        loading: false
+      })
+
+    // If data doesn't exist, throw error
+    } else {
+      this.setState({
+        error: "Impossible to fetch personal data :(",
+        loading: false
+      })
     }
   }
 
@@ -35,11 +65,15 @@ class App extends Component {
   */
 
   render() {
-    return this.state.loading === true
-      ? <LoadingSpinner/>
-      : (exists(this.state.viewport)
-        ? this.state.viewport
-        : this.defaultViewport())
+    return exists(this.state.error)
+      ? <div className="app-error">{this.state.error}</div>
+      : (this.state.loading === true
+        ? <LoadingSpinner/>
+        : (exists(this.state.viewport)
+          ? this.state.viewport
+          : this.defaultViewport()
+        )
+      )
   }
 
   /*
@@ -48,24 +82,21 @@ class App extends Component {
 
   defaultViewport() {
     return <div className="flex-col center-h">
-      {Object.entries(this.cards).map(([k, v]) => {
-        return <div key={`card-${k}`}>
+      {this.cards.map((CardComponent, idx) =>
+        <div className="flex-col center-h card-wrapper" key={`card-${idx}`}>
+          <CardComponent {...this.state}/>
         </div>
-      })}
+      )}
     </div>
   }
 
   /*
-  **  Render card
+  **  Switch current viewport
   */
 
-  renderCard = (name) => {
-    return <div className="flex-col flex-middle">
-      <h3>{name}</h3>
-    </div>
-  }
+  switchViewport = (event) => {
 
-  // Switch viewport
+  }
 }
 
 export default App
