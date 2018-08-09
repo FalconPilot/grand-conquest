@@ -69,7 +69,7 @@ class FpSession {
   }
 
   // Check if used is logged in, optional callback if true
-  static public function initSession($callback = null, $forbidden = false) {
+  static public function initSession($callback = null, $errCallback = null) {
 
     // Check if user is logged in
     session_start();
@@ -78,10 +78,9 @@ class FpSession {
       setcookie(session_name(), "", time()-3600, "/");
       session_destroy();
 
-      // Execute code if un-logged activity is forbidden
-      if ($forbidden === true) {
-        http_response_code(401);
-        exit("[401] - Unauthorized");
+      // Execute error callback if specified
+      if (is_callable($errCallback)) {
+        $errCallback();
       }
 
     // Execute callback if user is logged-in

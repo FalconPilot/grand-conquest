@@ -1,4 +1,8 @@
+# Ignore common files
 /*_app/src/components/common
+/*_app/src/helpers/common
+
+# Ignore distant scripts
 /*_app/compile.sh
 /*_app/build.sh
 /*_app/ship.sh
