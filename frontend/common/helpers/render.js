@@ -9,7 +9,7 @@ import { fullString } from './utility'
 */
 
 export function renderFlag(url, alt = "flag") {
-  const src = fullString(url) ? url : ""
+  const src = fullString(url) ? url : "/static/img/gui/noflag.png"
   return <div className="flag-wrapper">
     <img src={src} alt={alt}/>
   </div>

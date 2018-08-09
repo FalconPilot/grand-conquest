@@ -16,7 +16,7 @@ class Profile extends Component {
 
   render() {
     return <div className="flex-col center-h">
-      <h3>{this.props.appData.user.email}</h3>
+      <h3>Profile</h3>
       {renderFlag(this.props.appData.user.flag_url)}
     </div>
   }
