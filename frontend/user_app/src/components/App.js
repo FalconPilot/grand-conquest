@@ -11,6 +11,9 @@ import LoadingSpinner from './common/LoadingSpinner/code'
 // Common functions
 import { exists } from '../helpers/common/utility'
 
+// CSS Imports
+import '../stylesheets/components/App.css'
+
 /*
 **  Main App component
 */
@@ -81,7 +84,7 @@ class App extends Component {
   */
 
   defaultViewport() {
-    return <div className="flex-col center-h">
+    return <div className="flex-row center-h cards-list">
       {this.cards.map((CardComponent, idx) =>
         <div className="flex-col center-h card-wrapper" key={`card-${idx}`}>
           <CardComponent {...this.state}/>

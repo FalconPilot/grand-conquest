@@ -1,8 +1,11 @@
 // React core
 import React, { Component } from 'react'
 
-// Common function
+// Common functions
 import { renderFlag } from '../helpers/common/render'
+
+// CSS Imports
+import '../stylesheets/components/Profile.css'
 
 /*
 **  User profile class

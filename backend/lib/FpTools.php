@@ -1,8 +1,5 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 /*
 **  Custom useful functions for convenience
 */
@@ -49,13 +46,15 @@ class FpTools {
   }
 
   /*
-  **  Query row, only selecting some keys
+  **  Query row(s), only selecting some keys
   */
 
-  static public function queryRowSelect($table, $cond = "true", $keys) {
+  static public function queryRowSelect($table, $cond = "true", $keys, $unique = false) {
     $q = implode(", ", $keys);
-    $result = FpTools::connect()->query("SELECT {$q} FROM {$table} WHERE {$cond} LIMIT 1");
-    return $result ? $result->fetch_array(MYSQLI_ASSOC) : null;
+    $limit = $unique === true ? "LIMIT 1" : "";
+    $result = FpTools::connect()->query("SELECT {$q} FROM {$table} WHERE {$cond} {$limit}");
+    $data = $result ? $result->fetch_all(MYSQLI_ASSOC) : null;
+    return $unique === true ? $data[0] : $data;
   }
 
   /*
@@ -64,9 +63,8 @@ class FpTools {
 
   static public function queryAll($table, $cond = "true", $exclude = []) {
     $result = FpTools::connect()->query("SELECT * FROM {$table} WHERE {$cond}");
-    $data = $result ? $result->fetch_array(MYSQLI_ASSOC) : null;
-    $wrap = $data && $result->num_rows === 1 ? [$data] : $data;
-    return FpTools::removeExcluded($wrap, $exclude);
+    $data = $result ? $result->fetch_all(MYSQLI_ASSOC) : null;
+    return FpTools::removeExcluded($data, $exclude);
   }
 
   /*
