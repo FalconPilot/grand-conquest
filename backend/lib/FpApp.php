@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include_once(dirname(__FILE__)."/FpTools.php");
 
 class FpApp {
@@ -9,8 +12,15 @@ class FpApp {
     "id",               // User ID
     "email",            // User email
     "username",         // Username
-    "flag_url",         // Player flag URL
+    "avatar_url",       // Player flag URL
     "personal_api_key"  // User API Key, used for front-end authentication
+  ];
+
+  // Nation keys
+  const NATION_KEYS = [
+    "id",       // Nation ID
+    "name",     // Nation name
+    "flag_url"  // Nation flag URL
   ];
 
   // Army keys
@@ -18,6 +28,13 @@ class FpApp {
     "id",         // Army ID
     "name",       // Army name
     "flag_url"    // Army manpower count
+  ];
+
+  // Squad keys
+  const SQUAD_KEYS = [
+    "id",         // Squad ID
+    "codename",   // Squad codename
+    "manpower"    // Squad manpower usage
   ];
 
   /*
@@ -29,12 +46,20 @@ class FpApp {
 
     // Fetch data
     $userData = FpTools::queryRowSelect("users", "id = {$uid}", FpApp::USER_KEYS, true);
+    $nationData = FpTools::queryRowSelect("nations", "id_owner = {$uid}", FpApp::NATION_KEYS, true);
     $aqr = FpTools::queryRowSelect("armies", "id_owner = {$uid}", FpApp::ARMY_KEYS);
-    $armies = $aqr && count(array_filter(array_keys($aqr), 'is_string')) > 0 ? [$aqr] : $aqr;
+    $aqd = new FpArray($aqr && count(array_filter(array_keys($aqr), 'is_string')) > 0 ? [$aqr] : $aqr);
+    $armies = $aqd->map(function($army) {
+      $obj = $army;
+      $squads = FpTools::queryRowSelect("squads", "id_army = {$army['id']}", FpApp::SQUAD_KEYS);
+      $obj['squads'] = $squads;
+      return $obj;
+    })->get();
 
     // Compose final associative array
     return [
       "user"    => $userData,
+      "nation"  => $nationData,
       "armies"  => ($armies ? $armies : [])
     ];
   }
