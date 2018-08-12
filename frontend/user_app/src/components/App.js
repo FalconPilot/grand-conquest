@@ -2,8 +2,9 @@
 import React, { Component } from 'react'
 
 // Local components
-import Armies  from './Armies'
-import Profile from './Profile'
+import Armies   from './Armies'
+import Nation   from './Nation'
+import Profile  from './Profile'
 
 // Common components
 import LoadingSpinner from './common/LoadingSpinner/code'
@@ -19,12 +20,6 @@ import '../stylesheets/components/App.css'
 */
 
 class App extends Component {
-
-  /*
-  **  Constant card list to render
-  */
-
-  cards = [ Profile, Armies ]
 
   /*
   **  Class constructor
@@ -85,11 +80,10 @@ class App extends Component {
 
   defaultViewport() {
     return <div className="flex-row center-h cards-list">
-      {this.cards.map((CardComponent, idx) =>
-        <div className="flex-col center-h card-wrapper" key={`card-${idx}`}>
-          <CardComponent {...this.state}/>
-        </div>
-      )}
+      <Profile width="50%" {...this.state}/>
+      <Nation width="50%" {...this.state}/>
+      <hr/>
+      <Armies width="100%" {...this.state}/>
     </div>
   }
 

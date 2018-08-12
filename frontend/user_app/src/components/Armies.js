@@ -31,14 +31,11 @@ class Armies extends Component {
 
   render() {
     const armies = this.props.appData.armies.map(this.renderArmy)
-    const width = exists(this.state.index) ? "30%" : 0
     return <div className="flex-col center-h armies-card">
       <h3>Armies</h3>
       <div className="flex-row">
         <div className="flex-row center-v cards-carrousel">
           {armies.length > 0 ? armies : <p className="no-res">No army</p>}
-        </div>
-        <div style={{width: width}} className="flex-col">
         </div>
       </div>
     </div>

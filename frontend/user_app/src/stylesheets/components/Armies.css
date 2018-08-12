@@ -2,16 +2,13 @@
 **  Armies card CSS
 */
 
-div.armies-card {
-  width: 100%;
-  min-width: 70vw;
-}
+div.armies-card { width: 100%; }
 
-div.armies-card > div {
-  width: 100%;
-}
+div.armies-card > div { width: 100%; }
 
 div.cards-carrousel {
   flex: 1;
   overflow-x: auto;
 }
+
+div.cards-carrousel > div { margin: 5px; }
