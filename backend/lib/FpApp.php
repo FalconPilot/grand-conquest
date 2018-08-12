@@ -37,6 +37,11 @@ class FpApp {
     "manpower"    // Squad manpower usage
   ];
 
+  // Squad equipment keys
+  const EQUIP_KEYS = [
+
+  ];
+
   /*
   **  Load App profile of logged-in user
   */
@@ -51,7 +56,13 @@ class FpApp {
     $aqd = new FpArray($aqr && count(array_filter(array_keys($aqr), 'is_string')) > 0 ? [$aqr] : $aqr);
     $armies = $aqd->map(function($army) {
       $obj = $army;
-      $squads = FpTools::queryRowSelect("squads", "id_army = {$army['id']}", FpApp::SQUAD_KEYS);
+      $sqd = new FpArray(FpTools::queryRowSelect("squads", "id_army = {$army['id']}", FpApp::SQUAD_KEYS));
+      $squads = $sqd->map(function($squad) {
+        $obj = $squad;
+        $sqe = FpTools::queryEquipment($squad['id']);
+        $obj['equipment'] = $sqe;
+        return $obj;
+      })->get();
       $obj['squads'] = $squads;
       return $obj;
     })->get();

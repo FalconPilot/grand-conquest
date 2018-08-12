@@ -1,7 +1,7 @@
 <?php
 
 // GC Backend Version
-define('GC_VERSION', '0.2.4');
+define('GC_VERSION', '0.2.5');
 
 // Include common files
 $base = dirname(__FILE__);

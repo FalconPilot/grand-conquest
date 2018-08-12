@@ -68,6 +68,33 @@ class FpTools {
   }
 
   /*
+  **  Query squad equipment
+  */
+
+  static public function queryEquipment($id_squad) {
+    $joint = FpTools::connect()->query("SELECT
+        id_equipment,
+        quantity,
+        equipment_table
+      FROM squads_equipments
+      WHERE id_squad = {$id_squad}
+    ")->fetch_all(MYSQLI_ASSOC);
+
+    return array_map(function($obj) {
+      $result = FpTools::connect()->query("SELECT
+          id,
+          name,
+          image_url,
+          description
+        FROM {$obj['equipment_table']}
+        WHERE id = {$obj['id_equipment']}
+      ")->fetch_array(MYSQLI_ASSOC);
+      $result['quantity'] = $obj['quantity'];
+      return $result;
+    }, $joint);
+  }
+
+  /*
   **  Roll a set amount of dices
   */
 
