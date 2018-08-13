@@ -21,7 +21,10 @@ class Armies extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      index: null
+      selected: null,
+      armyName: null,
+      squad: null,
+      codename: null
     }
   }
 
@@ -33,11 +36,10 @@ class Armies extends Component {
     const armies = this.props.appData.armies.map(this.renderArmy)
     return <div className="flex-col center-h armies-card">
       <h3>Armies</h3>
-      <div className="flex-row">
-        <div className="flex-row center-v cards-carrousel">
-          {armies.length > 0 ? armies : <p className="no-res">No army</p>}
-        </div>
+      <div className="flex-row center-v cards-carrousel">
+        {armies.length > 0 ? armies : <p className="no-res">No army</p>}
       </div>
+      {exists(this.state.selected) && this.armyDetails(this.props.appData.armies[this.state.selected])}
     </div>
   }
 
@@ -59,13 +61,52 @@ class Armies extends Component {
   }
 
   /*
+  **  Render single squad
+  */
+
+  renderSquad = (squad, idx) => {
+    return <div/>
+  }
+
+  /*
+  **  Render army details
+  */
+
+  armyDetails = (army) => {
+    return <form className="flex-col">
+      <p>Editing {army.name}</p>
+      {renderFlag(army.flag_url)}
+      <input
+        type="text"
+        value={this.state.armyName}
+      />
+    </form>
+  }
+
+  /*
   **  Switch selected army
   */
 
   selectArmy = (event) => {
-    const idx = event.currentTarget.dataset.idx
-    this.setState({ index: idx === this.state.index ? null : idx })
+    const idx = event.currentTarget.dataset.index
+    this.setState({
+      selected: idx === this.state.selected ? null : idx,
+      armyName: idx === this.state.selected ? null : this.props.appData.armies[idx].name
+    })
   }
+
+  /*
+  **  Switch selected squad
+  */
+
+  selectSquad = (event) => {
+    const idx = event.currentTarget.datset.index
+    this.setState({
+      selected: idx === this.state.squad ? null : idx,
+      codename: idx === this.state.squad ? null : this.props.appData.armies[this.state.selected].squads[idx]
+    })
+  }
+
 }
 
 export default Armies

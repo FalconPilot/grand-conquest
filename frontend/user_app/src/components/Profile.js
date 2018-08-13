@@ -36,7 +36,7 @@ class Profile extends Component {
       style={{width: this.props.width}}
       onSubmit={this.submitProfile}
     >
-      <h3>Profile</h3>
+      <h3>{this.props.appData.user.username}</h3>
       {renderAvatar(this.props.appData.user.avatar_url)}
       <input
         type="text"
