@@ -6,9 +6,6 @@ div.armies-card { width: 100%; }
 
 div.armies-card > div { width: 100%; }
 
-div.cards-carrousel {
-  flex: 1;
-  overflow-x: auto;
-}
+div.cards-carrousel { overflow-x: auto; }
 
 div.cards-carrousel > div { margin: 5px; }

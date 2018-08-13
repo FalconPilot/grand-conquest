@@ -34,9 +34,10 @@ class Armies extends Component {
 
   render() {
     const armies = this.props.appData.armies.map(this.renderArmy)
+    const height = exists(this.state.selected) ? 0 : null
     return <div className="flex-col center-h armies-card">
       <h3>Armies</h3>
-      <div className="flex-row center-v cards-carrousel">
+      <div className="flex-row center-v cards-carrousel" style={{height: height}}>
         {armies.length > 0 ? armies : <p className="no-res">No army</p>}
       </div>
       {exists(this.state.selected) && this.armyDetails(this.props.appData.armies[this.state.selected])}
@@ -90,8 +91,8 @@ class Armies extends Component {
   selectArmy = (event) => {
     const idx = event.currentTarget.dataset.index
     this.setState({
-      selected: idx === this.state.selected ? null : idx,
-      armyName: idx === this.state.selected ? null : this.props.appData.armies[idx].name
+      selected: idx,
+      armyName: this.props.appData.armies[idx].name
     })
   }
 
@@ -102,8 +103,8 @@ class Armies extends Component {
   selectSquad = (event) => {
     const idx = event.currentTarget.datset.index
     this.setState({
-      selected: idx === this.state.squad ? null : idx,
-      codename: idx === this.state.squad ? null : this.props.appData.armies[this.state.selected].squads[idx]
+      selected: idx,
+      codename: this.props.appData.armies[this.state.selected].squads[idx]
     })
   }
 
