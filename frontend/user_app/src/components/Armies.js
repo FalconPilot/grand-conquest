@@ -34,12 +34,11 @@ class Armies extends Component {
 
   render() {
     const armies = this.props.appData.armies.map(this.renderArmy)
-    const height = exists(this.state.selected) ? 0 : null
     return <div className="flex-col center-h armies-card">
       <h3>Armies</h3>
-      <div className="flex-row center-v cards-carrousel" style={{height: height}}>
+      {!exists(this.state.selected) && <div className="flex-row center-v cards-carrousel">
         {armies.length > 0 ? armies : <p className="no-res">No army</p>}
-      </div>
+      </div>}
       {exists(this.state.selected) && this.armyDetails(this.props.appData.armies[this.state.selected])}
     </div>
   }
