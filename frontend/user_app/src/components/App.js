@@ -6,6 +6,10 @@ import Armies   from './Armies'
 import Nation   from './Nation'
 import Profile  from './Profile'
 
+// Local data
+import { envType }   from '../../package.json'
+import { debugData } from '../data/local_dataset'
+
 // Common components
 import LoadingSpinner from './common/LoadingSpinner/code'
 
@@ -41,15 +45,23 @@ class App extends Component {
   */
 
   componentWillMount() {
-    document.getElementById('app-ephemeral').outerHTML = ''
+    const eph = document.getElementById('app-ephemeral')
+    if (exists(eph)) { eph.outerHTML = '' }
+
+    const dataset = {
+      "local": debugData,
+      "production": window.appData
+    }
+
+    const appData = dataset[envType]
 
     // If data exist, finish loading
-    if (exists(window.appData)) {
-      const amp = window.appData.nation.manpower - window.appData.armies.reduce((total, army) => {
+    if (exists(appData)) {
+      const amp = appData.nation.manpower - appData.armies.reduce((total, army) => {
         return total + army.squads.reduce((t, s) => t + s.manpower, 0)
       }, 0)
       this.setState({
-        appData: window.appData,
+        appData: appData,
         loading: false,
         availableManpower: amp
       })

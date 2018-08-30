@@ -1,8 +1,9 @@
 {
   "name": "gc-user-app",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "private": true,
   "homepage": "/app",
+  "envType":  "production",
   "dependencies": {
     "intersperse": "^1.0.0",
     "react": "^16.4.2",
