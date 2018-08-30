@@ -40,7 +40,11 @@ class FpApp {
 
   // Squad equipment keys
   const EQUIP_KEYS = [
-
+    "id",           // Equipment ID
+    "name",         // Equipment name
+    "image_url",    // Equipment image
+    "description",  // Equipment description
+    "unit_cost"     // Equipment production cost
   ];
 
   /*
@@ -50,9 +54,15 @@ class FpApp {
   static public function fetchData() {
     $uid = $_SESSION['id'];
 
-    // Fetch data
+    // User data
     $userData = FpTools::queryRowSelect("users", "id = {$uid}", FpApp::USER_KEYS, true);
+
+    // Nation data
     $nationData = FpTools::queryRowSelect("nations", "id_owner = {$uid}", FpApp::NATION_KEYS, true);
+    $eqd = FpTools::queryEquipment("id_nation", $nationData['id'], "nations_equipments");
+    $nationData['equipment'] = $eqd;
+
+    // Army and squad data
     $aqr = FpTools::queryRowSelect("armies", "id_owner = {$uid}", FpApp::ARMY_KEYS);
     $aqd = new FpArray($aqr && count(array_filter(array_keys($aqr), 'is_string')) > 0 ? [$aqr] : $aqr);
     $armies = $aqd->map(function($army) {
@@ -60,7 +70,7 @@ class FpApp {
       $sqd = new FpArray(FpTools::queryRowSelect("squads", "id_army = {$army['id']}", FpApp::SQUAD_KEYS));
       $squads = $sqd->map(function($squad) {
         $obj = $squad;
-        $sqe = FpTools::queryEquipment($squad['id']);
+        $sqe = FpTools::queryEquipment("id_squad", $squad['id'], "squads_equipments");
         $obj['equipment'] = $sqe;
         return $obj;
       })->get();

@@ -68,31 +68,34 @@ class FpTools {
   }
 
   /*
-  **  Query squad equipment
+  **  Query equipment
   */
 
-  static public function queryEquipment($id_squad) {
+  static public function queryEquipment($id_key, $id_query, $origin) {
     $joint = FpTools::connect()->query("SELECT
         id_equipment,
         quantity,
         equipment_table
-      FROM squads_equipments
-      WHERE id_squad = {$id_squad}
+      FROM {$origin}
+      WHERE {$id_key} = {$id_query}
     ")->fetch_all(MYSQLI_ASSOC);
 
     return array_map(function($obj) {
-      $result = FpTools::connect()->query("SELECT
+      return FpTools::connect()->query("SELECT
           id,
           name,
           image_url,
-          description
+          description,
+          {$obj['quantity']} AS 'quantity'
         FROM {$obj['equipment_table']}
         WHERE id = {$obj['id_equipment']}
       ")->fetch_array(MYSQLI_ASSOC);
-      $result['quantity'] = $obj['quantity'];
-      return $result;
     }, $joint);
   }
+
+  /*
+  **
+  */
 
   /*
   **  Roll a set amount of dices
