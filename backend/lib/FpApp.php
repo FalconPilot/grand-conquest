@@ -20,7 +20,8 @@ class FpApp {
   const NATION_KEYS = [
     "id",       // Nation ID
     "name",     // Nation name
-    "flag_url"  // Nation flag URL
+    "flag_url", // Nation flag URL
+    "manpower"  // National manpower
   ];
 
   // Army keys
