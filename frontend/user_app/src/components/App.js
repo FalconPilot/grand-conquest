@@ -31,7 +31,8 @@ class App extends Component {
       loading:  true,
       error:    null,
       viewport: null,
-      appData:  null
+      appData:  null,
+      availableManpower: 0
     }
   }
 
@@ -44,9 +45,13 @@ class App extends Component {
 
     // If data exist, finish loading
     if (exists(window.appData)) {
+      const amp = window.appData.nation.manpower - window.appData.armies.reduce((total, army) => {
+        return total + army.squads.reduce((t, s) => t + s.manpower, 0)
+      }, 0)
       this.setState({
         appData: window.appData,
-        loading: false
+        loading: false,
+        availableManpower: amp
       })
 
     // If data doesn't exist, throw error
