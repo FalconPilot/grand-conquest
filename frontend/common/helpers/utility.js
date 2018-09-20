@@ -14,3 +14,11 @@ export function fullString(x) {
     && typeof x === "string"
     && x.trim() !== ""
 }
+
+// Set error for state
+export function setError(component, msg) {
+  component.setState({
+    error: msg,
+    loading: false
+  })
+}

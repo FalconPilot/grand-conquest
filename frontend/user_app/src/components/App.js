@@ -14,10 +14,13 @@ import { debugData } from '../data/local_dataset'
 import LoadingSpinner from './common/LoadingSpinner/code'
 
 // Common functions
-import { exists } from '../helpers/common/utility'
+import { exists, setError } from '../helpers/common/utility'
 
 // CSS Imports
 import '../stylesheets/components/App.css'
+
+// External requires
+const PCO = require('promise-composer')
 
 /*
 **  Main App component
@@ -45,34 +48,35 @@ class App extends Component {
   */
 
   componentWillMount() {
-    const eph = document.getElementById('app-ephemeral')
-    if (exists(eph)) { eph.outerHTML = '' }
 
-    const dataset = {
-      "local": debugData,
-      "production": window.appData
-    }
+    // Start async verification of loading script
+    Promise.resolve(document.getElementById('app-ephemeral'))
 
-    const appData = dataset[envType]
-
-    // If data exist, finish loading
-    if (exists(appData)) {
-      const amp = appData.nation.manpower - appData.armies.reduce((total, army) => {
-        return total + army.squads.reduce((t, s) => t + s.manpower, 0)
-      }, 0)
-      this.setState({
-        appData: appData,
-        loading: false,
-        availableManpower: amp
+      // If script is found, try to obtain appData
+      .then(PCO.isset)
+      .then(eph => {
+        eph.outerHTML = ''
+        return {
+          "local": debugData,
+          "production": window.appData
+        }[envType]
       })
 
-    // If data doesn't exist, throw error
-    } else {
-      this.setState({
-        error: "Impossible to fetch personal data :(",
-        loading: false
+      // If appData exists, finish loading
+      .then(PCO.isset)
+      .then(appData => {
+        const amp = appData.nation.manpower - appData.armies.reduce((total, army) => {
+          return total + army.squads.reduce((t, s) => t + s.manpower, 0)
+        }, 0)
+        this.setState({
+          appData: appData,
+          loading: false,
+          availableManpower: amp
+        })
       })
-    }
+
+      // Handle errors
+      .catch(_x => setError(this, "Impossible to fetch personal data :("))
   }
 
   /*

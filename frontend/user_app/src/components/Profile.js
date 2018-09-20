@@ -7,6 +7,9 @@ import { renderAvatar } from '../helpers/common/render'
 // CSS Imports
 import '../stylesheets/components/Profile.css'
 
+// External requires
+const PCO = require('promise-composer')
+
 /*
 **  User profile class
 */
@@ -55,11 +58,10 @@ class Profile extends Component {
   updateInput = (event) => {
     const key = event.currentTarget.name
     const value = event.currentTarget.value
-    if (key && value) {
-      this.setState({ inputs: Object.assign(this.state.inputs, {[key]: value}) })
-    } else {
-      console.warn("Trying to update input without a key OR a value")
-    }
+    Promise.resolve([key, value])
+      .then(x => PCO.traverse(x, PCO.exists))
+      .then(x => this.setState({ inputs: Object.assign(this.state.inputs, {[key]: value}) }))
+      .catch(x => warn("Trying to update input without a key OR a value"))
   }
 
   /*

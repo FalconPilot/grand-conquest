@@ -1,14 +1,15 @@
 {
   "name": "gc-user-app",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "homepage": "/app",
-  "envType":  "production",
+  "envType": "production",
   "dependencies": {
     "intersperse": "^1.0.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-scripts": "1.1.4"
+    "promise-composer": "^0.3.5",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-scripts": "1.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
